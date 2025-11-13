@@ -3,9 +3,15 @@ from scores import update_high_score, load_scores
 
 DIFFICULTY = {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     "easy":   {"range": (1, 20),   "max_attempts": 8},
     "normal": {"range": (1, 50),   "max_attempts": 7},
     "hard":   {"range": (1, 100),  "max_attempts": 6},
+=======
+    "easy":   {"range": (1, 20),   "max_attempts": 8, "mult": 1},
+    "normal": {"range": (1, 50),   "max_attempts": 7, "mult": 2},
+    "hard":   {"range": (1, 100),  "max_attempts": 6, "mult": 3},
+>>>>>>> Stashed changes
 =======
     "easy":   {"range": (1, 20),   "max_attempts": 8, "mult": 1},
     "normal": {"range": (1, 50),   "max_attempts": 7, "mult": 2},
@@ -22,15 +28,21 @@ def choose_difficulty():
         print("Please choose 'easy', 'normal', or 'hard'.")
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 def play_with_difficulty():
     level = choose_difficulty()
     rmin, rmax = DIFFICULTY[level]["range"]
     max_attempts = DIFFICULTY[level]["max_attempts"]
 =======
+=======
+>>>>>>> Stashed changes
 def play_with_difficulty(level: str, player: str):
     rmin, rmax = DIFFICULTY[level]["range"]
     max_attempts = DIFFICULTY[level]["max_attempts"]
     mult = DIFFICULTY[level]["mult"]
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
     secret = random.randint(rmin, rmax)
     attempts = 0
@@ -41,7 +53,11 @@ def play_with_difficulty(level: str, player: str):
     while attempts < max_attempts:
         raw = input(f"Attempt {attempts+1}/{max_attempts} — your guess: ").strip()
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         if not raw.lstrip("-").isdigit():  # allow negative sign, we'll range-check next
+=======
+        if not raw.lstrip("-").isdigit():
+>>>>>>> Stashed changes
 =======
         if not raw.lstrip("-").isdigit():
 >>>>>>> Stashed changes
@@ -59,6 +75,7 @@ def play_with_difficulty(level: str, player: str):
         elif guess > secret:
             print("Too high!")
         else:
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
             print(f"✅ Correct! You needed {attempts} attempt(s).")
             return
@@ -85,12 +102,33 @@ def main():
 
 def main():
     print("\n=== Number Guessing Game ===\n")
+=======
+            # Simple scoring: base 100, minus attempts penalty, times difficulty multiplier
+            score = max(0, (100 - (attempts - 1) * 10)) * mult
+            print(f"✅ Correct! You needed {attempts} attempt(s). Score: {score}")
+
+            improved, best = update_high_score(level, player, score)
+            if improved:
+                print(f"🏆 New high score for {level}! {best['player']} — {best['score']}")
+            else:
+                print(f"Best {level} score: {best['player']} — {best['score']}")
+
+            return
+
+    print(f"❌ Out of attempts! The number was {secret}. Score: 0")
+
+def main():
+    print("\n=== Number Guessing Game ===\n")
+>>>>>>> Stashed changes
     player = input("Enter your name: ").strip() or "Player"
     level = choose_difficulty()
     highs = load_scores()
     if level in highs:
         print(f"Current {level} high score: {highs[level]['player']} — {highs[level]['score']}")
     play_with_difficulty(level, player)
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
     print("\nThanks for playing!")
 
